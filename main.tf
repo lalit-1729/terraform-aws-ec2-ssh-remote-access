@@ -81,7 +81,7 @@ resource "aws_security_group_rule" "terraform_egress" {
 # key pair for remote access
 resource "aws_key_pair" "terrafrom_key_pair" {
   key_name   = "ssh_key_on_aws"
-  public_key = file("~/.ssh/aws_ass_key.pub")
+  public_key = file("~/.ssh/<your_access_key>.pub")
 }
 
 
@@ -108,7 +108,7 @@ resource "aws_instance" "terraform_ec2" {
     command = templatefile("ssh-config.tpl", {
       HOSTNAME =  self.public_ip,
       USER  = "ubuntu",
-      identityFile = "~/.ssh/aws_ass_key"
+      identityFile = "~/.ssh/<your_key_name>"
     })
     interpreter = ["bash", "-c"]
   }
